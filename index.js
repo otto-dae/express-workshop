@@ -1,28 +1,40 @@
 const express = require('express');
 const app = express();
-const pokedex = require('./pokedex.json')
+const {pokemon} = require('./pokedex.json')
 
-/* 
-Verbos HTTP 
-   
-    GET
-    POST
-    PATCH
-    PUT
-    DELETE
+/*
+    GET -Obtener recursos
+    POST - Almacenar/crear Recursos
+    PATCH - Modificar una parte de un recurso
+    PUT - Modificar un recurso
+    DELETE - Borrar un r ecurso
 */
-
 app.get("/",(req, res, next) =>
 {
-    const pokemon = pokedex.pokemon;
-    res.send(pokemon);
+    res.status(200);
+    res.send("Bienvenido aL pokedex");
 });
 
-app.get("/:name",(req, res, next) =>
+app.get("/pokemon",(req, res, next) =>
 {
-    console.log(req.params.name);
     res.status(200);
-    res.send("Hola " + req.params.name);
+    res.send(pokemon); 
+});
+
+app.get('/pokemon/:id([0-9]{1,3})', (req, res, next)  =>
+{
+    const id = req.params.id -1;
+    if(id >= 0 && id <= 150 )
+    {
+        res.status(200);
+        res.send(pokemon[req.params.id - 1]);
+    }
+    else
+    {
+        res.status(404);
+        res.send("Pokemon not found");
+    }
+    
 });
 
 app.listen(process.env.PORT || 3000, () =>
