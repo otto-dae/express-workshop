@@ -1,6 +1,10 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const {pokemon} = require('./pokedex.json')
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/",(req, res, next) =>
 {
@@ -9,7 +13,7 @@ app.get("/",(req, res, next) =>
 
 app.post("/pokemon",(req, res, next) =>
 {
-    return res.status(200).send("Estas en /pokemon POST"); 
+    return res.status(200).send(req.body.name); 
     
 });
 app.get("/pokemon",(req, res, next) =>
