@@ -1,9 +1,16 @@
 const express = require('express');
 const app = express();
 const {pokemon} = require('./pokedex.json')
+
 app.get("/",(req, res, next) =>
 {
     return res.status(200).send("Bienvenido aL pokedex");
+});
+
+app.post("/pokemon",(req, res, next) =>
+{
+    return res.status(200).send("Estas en /pokemon POST"); 
+    
 });
 app.get("/pokemon",(req, res, next) =>
 {
