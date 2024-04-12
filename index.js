@@ -7,13 +7,18 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.get("/",(req, res, next) =>
+{
+    return res.status(200).json({code: 1, message: "Bienvenido a la pokedex"});
+});
 
 app.use("/pokemon", pokemon);
 
-app.get("/",(req, res, next) =>
+app.use((req, res, next) => 
 {
-    return res.status(200).send("Bienvenido aL pokedex");
+    return res.status(404).json({code: 404, message: "URL not found"})
 });
+
 
 app.listen(process.env.PORT || 3000, () =>
 {
