@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const pokemon = require('./routes/pokemon');
 const user = require('./routes/user');
+const auth = require('./middleware/auth')
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -13,8 +14,10 @@ app.get("/",(req, res, next) =>
     return res.status(200).json({code: 1, message: "Bienvenido a la pokedex"});
 });
 
-app.use("/pokemon", pokemon);
 app.use("/user",user)
+app.use(auth );
+
+app.use("/pokemon", pokemon);
 
 app.use((req, res, next) => 
 {
