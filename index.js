@@ -15,7 +15,7 @@ app.get("/",(req, res, next) =>
 });
 
 app.use("/user",user)
-app.use(auth );
+app.use(auth);
 
 app.use("/pokemon", pokemon);
 
