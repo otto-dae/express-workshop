@@ -39,7 +39,7 @@ user.post("/login", async (req, res, next) => {
             return res.status(200).json({code: 200, message: token});
         }
         else{
-            return res.status(200).json({code: 200, message: "User or password incorrect"});
+            return res.status(201).json({code: 201, message: "User or password incorrect"});
     
         }
     }
