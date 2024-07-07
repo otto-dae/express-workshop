@@ -11,7 +11,7 @@ user.post("/signup", async (req, res, next) => {
         const rows = await db.query(query);
     
         if(rows.affectedRows == 1){
-            return res.status(201).json({code: 201, message: "User registered"});
+            return res.status(200).json({code: 200, message: "User registered"});
         }
         return res.status(500).json({code: 500, message: "Could not register user"});
     }
@@ -39,7 +39,7 @@ user.post("/login", async (req, res, next) => {
             return res.status(200).json({code: 200, message: token});
         }
         else{
-            return res.status(401).json({code: 401, message: "User or password incorrect"});
+            return res.status(200).json({code: 200, message: "User or password incorrect"});
     
         }
     }
